@@ -1,9 +1,6 @@
 package com.hunseong.calendar.core;
 
 import com.hunseong.calendar.core.domain.ScheduleType;
-import com.hunseong.calendar.core.domain.entity.Engagement;
-import com.hunseong.calendar.core.domain.Event;
-import com.hunseong.calendar.core.domain.RequestStatus;
 import com.hunseong.calendar.core.domain.entity.Schedule;
 import com.hunseong.calendar.core.domain.entity.User;
 import org.junit.jupiter.api.Test;

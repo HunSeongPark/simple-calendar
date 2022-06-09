@@ -15,10 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "engagements")
 @Entity
-public class Engagement {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Engagement extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "schedule_id")
@@ -27,8 +24,6 @@ public class Engagement {
     @ManyToOne
     @JoinColumn(name = "attendee_id")
     private User attendee;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;

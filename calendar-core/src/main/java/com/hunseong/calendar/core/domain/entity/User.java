@@ -15,15 +15,12 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "users")
 @Entity
-public class User {
+public class User extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
     private String email;
     private String password;
     private LocalDate birthday;
-    private LocalDateTime createdAt = LocalDateTime.now();
 
     public User(String name, String email, String password, LocalDate birthday) {
         this.name = name;
