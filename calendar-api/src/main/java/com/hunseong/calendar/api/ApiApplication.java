@@ -22,7 +22,7 @@ import java.util.List;
 @EnableJpaRepositories("com.hunseong.calendar.core")
 @RequiredArgsConstructor
 @EnableJpaAuditing
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.hunseong.calendar")
 public class ApiApplication {
 
     private final SimpleEntityRepository repository;

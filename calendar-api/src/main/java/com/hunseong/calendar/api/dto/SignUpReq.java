@@ -1,6 +1,8 @@
 package com.hunseong.calendar.api.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -8,9 +10,11 @@ import java.time.LocalDate;
  * Created by Hunseong on 2022/06/09
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SignUpReq {
-    private final String name;
-    private final String email;
-    private final String password;
-    private final LocalDate birthday;
+    private String name;
+    private String email;
+    private String password;
+    private LocalDate birthday;
 }

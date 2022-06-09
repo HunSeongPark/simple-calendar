@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private static final String LOGIN_SESSION_KEY = "USER_ID";
+    public static final String LOGIN_SESSION_KEY = "USER_ID";
     private final UserService userService;
 
     @Transactional
