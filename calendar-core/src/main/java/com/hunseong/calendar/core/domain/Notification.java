@@ -1,6 +1,7 @@
 package com.hunseong.calendar.core.domain;
 
-import lombok.AllArgsConstructor;
+import com.hunseong.calendar.core.domain.entity.Schedule;
+import com.hunseong.calendar.core.domain.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,16 +14,9 @@ import java.time.LocalDateTime;
 @Getter
 public class Notification {
 
-    private Long id;
-    private LocalDateTime notifyAt;
-    private String title;
-    private User writer;
-    private LocalDateTime createdAt;
+    private Schedule schedule;
 
-    public Notification(LocalDateTime notifyAt, String title, User writer, LocalDateTime createdAt) {
-        this.notifyAt = notifyAt;
-        this.title = title;
-        this.writer = writer;
-        this.createdAt = createdAt;
+    public Notification(Schedule schedule) {
+        this.schedule = schedule;
     }
 }
