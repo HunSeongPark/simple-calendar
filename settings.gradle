@@ -2,4 +2,3 @@ rootProject.name = 'calendar'
 include 'calendar-core'
 include 'calendar-api'
 include 'calendar-batch'
-
