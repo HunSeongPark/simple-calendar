@@ -1,5 +1,6 @@
 package com.hunseong.calendar.core.domain.entity;
 
+import com.hunseong.calendar.core.util.Encryptor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,9 @@ public class User extends BaseEntity {
         this.email = email;
         this.password = password;
         this.birthday = birthday;
+    }
+
+    public boolean isMatch(Encryptor encryptor, String password) {
+        return encryptor.isMatch(password, this.password);
     }
 }

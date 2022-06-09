@@ -3,6 +3,7 @@ package com.hunseong.calendar.core.service;
 import com.hunseong.calendar.core.domain.entity.User;
 import com.hunseong.calendar.core.domain.entity.repository.UserRepository;
 import com.hunseong.calendar.core.dto.UserCreateReq;
+import com.hunseong.calendar.core.util.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    private final Encryptor encryptor;
     private final UserRepository userRepository;
 
     @Transactional
@@ -27,14 +29,16 @@ public class UserService {
         return userRepository.save(new User(
                 userCreateReq.getName(),
                 userCreateReq.getEmail(),
-                userCreateReq.getPassword(),
+                encryptor.encrypt(userCreateReq.getPassword()),
                 userCreateReq.getBirthday()
         ));
     }
 
     @Transactional
     public Optional<User> findPwMatchUser(String email, String password) {
+        // strategy pattern
+        // User 객체에 대한 기능테스트 편리
         return userRepository.findByEmail(email)
-                .map(user -> user.getPassword().equals(password) ? user : null);
+                .map(user -> user.isMatch(encryptor, password) ? user : null);
     }
 }
