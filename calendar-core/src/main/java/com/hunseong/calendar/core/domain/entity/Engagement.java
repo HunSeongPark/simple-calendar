@@ -2,6 +2,8 @@ package com.hunseong.calendar.core.domain.entity;
 
 import com.hunseong.calendar.core.domain.Event;
 import com.hunseong.calendar.core.domain.RequestStatus;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,8 @@ import java.time.LocalDateTime;
 /**
  * Created by Hunseong on 2022/06/09
  */
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Table(name = "engagements")
@@ -27,4 +31,8 @@ public class Engagement extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private RequestStatus requestStatus;
+
+    public Event getEvent() {
+        return schedule.toEvent();
+    }
 }
