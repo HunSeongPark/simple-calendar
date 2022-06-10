@@ -27,37 +27,25 @@ public class ScheduleQueryService {
     private final EngagementRepository engagementRepository;
 
     public List<ScheduleDto> getScheduleByDay(AuthUser authUser, LocalDate date) {
-        return Stream.concat(
-                scheduleRepository.findAllByWriter_Id(authUser.getId())
-                        .stream()
-                        .filter(schedule -> schedule.isOverlapped(date))
-                        .map(DtoConverter::fromSchedule),
-                engagementRepository.findAllByAttendee_Id(authUser.getId())
-                        .stream()
-                        .filter(engagement -> engagement.isOverlapped(date))
-                        .map(engagement -> DtoConverter.fromSchedule(engagement.getSchedule()))
-        ).toList();
+        return getSchedulesByPeriod(authUser, Period.of(date, date));
     }
 
     public List<ScheduleDto> getScheduleByWeek(AuthUser authUser, LocalDate startOfWeek) {
-        final Period period = Period.of(startOfWeek, startOfWeek.plusDays(6));
-        return Stream.concat(
-                scheduleRepository.findAllByWriter_Id(authUser.getId())
-                        .stream()
-                        .filter(schedule -> schedule.isOverlapped(period))
-                        .map(DtoConverter::fromSchedule),
-                engagementRepository.findAllByAttendee_Id(authUser.getId())
-                        .stream()
-                        .filter(engagement -> engagement.isOverlapped(period))
-                        .map(engagement -> DtoConverter.fromSchedule(engagement.getSchedule()))
-        ).toList();
+        return getSchedulesByPeriod(authUser,
+                Period.of(startOfWeek, startOfWeek.plusDays(6)));
     }
 
     public List<ScheduleDto> getScheduleByMonth(AuthUser authUser, YearMonth yearMonth) {
-        final Period period = Period.of(yearMonth.atDay(1), yearMonth.atEndOfMonth());
+        return getSchedulesByPeriod(authUser,
+                Period.of(yearMonth.atDay(1), yearMonth.atEndOfMonth()));
+    }
+
+    private List<ScheduleDto> getSchedulesByPeriod(AuthUser authUser, Period period) {
         return Stream.concat(
                 scheduleRepository.findAllByWriter_Id(authUser.getId())
                         .stream()
+                        // 쿼리를 수정하여 가져오는 쿼리를 통해 가져오는 리소스의 양을 줄이는 방법도 존재.
+                        // 장단점에 따라 선택
                         .filter(schedule -> schedule.isOverlapped(period))
                         .map(DtoConverter::fromSchedule),
                 engagementRepository.findAllByAttendee_Id(authUser.getId())
