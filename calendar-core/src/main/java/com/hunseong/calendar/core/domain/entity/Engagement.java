@@ -41,4 +41,8 @@ public class Engagement extends BaseEntity {
     public boolean isOverlapped(LocalDate date) {
         return Period.of(schedule.getStartAt(), schedule.getEndAt()).isOverlapped(date);
     }
+
+    public boolean isOverlapped(Period period) {
+        return Period.of(schedule.getStartAt(), schedule.getEndAt()).isOverlapped(period);
+    }
 }
