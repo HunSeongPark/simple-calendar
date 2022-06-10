@@ -3,6 +3,8 @@ package com.hunseong.calendar.core.service;
 import com.hunseong.calendar.core.domain.entity.User;
 import com.hunseong.calendar.core.domain.entity.repository.UserRepository;
 import com.hunseong.calendar.core.dto.UserCreateReq;
+import com.hunseong.calendar.core.exception.CalendarException;
+import com.hunseong.calendar.core.exception.ErrorCode;
 import com.hunseong.calendar.core.util.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class UserService {
     public User create(UserCreateReq userCreateReq) {
         userRepository.findByEmail(userCreateReq.getEmail())
                 .ifPresent(user -> {
-                    throw new RuntimeException("user already existed!");
+                    throw new CalendarException(ErrorCode.ALREADY_EXISTS_USER);
                 });
         return userRepository.save(new User(
                 userCreateReq.getName(),
@@ -45,6 +47,6 @@ public class UserService {
     @Transactional
     public User findByUserId(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("no user by id."));
+                .orElseThrow(() -> new CalendarException(ErrorCode.USER_NOT_FOUND));
     }
 }

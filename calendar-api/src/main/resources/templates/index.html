@@ -129,8 +129,7 @@
             console.log(res)
             location.reload();
         }).catch((e) => {
-        alert(JSON.stringify(e.response))
-<!--            alert(e.response.data.errorMessage)-->
+        alert(e.response.data.errorMessage)
         })
     })
 
@@ -144,8 +143,7 @@
             location.reload();
         }).catch((e) => {
             console.log(e)
-            alert(JSON.stringify(e.response))
-<!--            alert(e.response.data.errorMessage)-->
+            alert(e.response.data.errorMessage)
         })
     })
 

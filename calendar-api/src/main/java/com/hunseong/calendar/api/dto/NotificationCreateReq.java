@@ -1,5 +1,7 @@
 package com.hunseong.calendar.api.dto;
 
+import com.hunseong.calendar.core.exception.CalendarException;
+import com.hunseong.calendar.core.exception.ErrorCode;
 import com.hunseong.calendar.core.util.TimeUnit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +36,6 @@ public class NotificationCreateReq {
                         case WEEK -> notifyAt.plusWeeks(inc);
                         case MONTH -> notifyAt.plusMonths(inc);
                         case YEAR -> notifyAt.plusYears(inc);
-                        default -> throw new RuntimeException("bad request. not match time unit!");
                     };
                 })
                 .collect(Collectors.toList());
