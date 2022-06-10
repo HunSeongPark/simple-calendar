@@ -3,6 +3,7 @@ package com.hunseong.calendar.core.domain;
 import com.hunseong.calendar.core.domain.entity.Engagement;
 import com.hunseong.calendar.core.domain.entity.Schedule;
 import com.hunseong.calendar.core.domain.entity.User;
+import com.hunseong.calendar.core.util.Period;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -22,6 +23,6 @@ public class Event {
     }
 
     public boolean isOverlapped(LocalDateTime startAt, LocalDateTime endAt) {
-        return schedule.getStartAt().isBefore(endAt) && startAt.isBefore(schedule.getEndAt());
+        return Period.of(schedule.getStartAt(), schedule.getEndAt()).isOverlapped(startAt, endAt);
     }
 }
