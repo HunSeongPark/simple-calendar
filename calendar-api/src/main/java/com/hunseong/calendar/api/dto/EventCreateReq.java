@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,9 +16,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventCreateReq {
+
+    @NotBlank
     private String title;
+
     private String description;
+
+    @NotNull
     private LocalDateTime startAt;
+
+    @NotNull
     private LocalDateTime endAt;
+
     private List<Long> attendeeIds;
 }

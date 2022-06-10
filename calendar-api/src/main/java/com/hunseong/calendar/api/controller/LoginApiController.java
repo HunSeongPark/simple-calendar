@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * Created by Hunseong on 2022/06/09
@@ -21,7 +22,7 @@ public class LoginApiController {
     private final LoginService loginService;
 
     @PostMapping("/api/sign-up")
-    public ResponseEntity<Void> signUp(@RequestBody SignUpReq signUpReq, HttpSession session) {
+    public ResponseEntity<Void> signUp(@Valid @RequestBody SignUpReq signUpReq, HttpSession session) {
         loginService.signUp(signUpReq, session);
         return ResponseEntity.ok().build();
     }
